@@ -66,9 +66,16 @@ pip install -r requirements.txt
 
 ## Usage
 
+In every new terminal, activate the virtual environment first:
+
 ```bash
+cd /path/to/pptx-ink-efficient
+source venv/bin/activate
 python app.py "/path/to/presentations"
 ```
+
+Every `.pptx`, `.ppt` and `.pdf` in that folder is converted; each gets its own
+output file. Example: `python app.py ~/Documents/lectures`.
 
 Output goes to `/path/to/presentations/output/`, e.g.
 `Lecture 1.pptx` → `output/Lecture 1_2up_A4.pdf`.
@@ -84,7 +91,7 @@ Options:
 | Option | Effect |
 |---|---|
 | `--workers N` | Files processed in parallel (default: up to 4) |
-| `--raster-only` | Rasterise converted pages fully instead of keeping vector text |
+| `--raster-only` | Force full image processing on every page. Not needed normally: each page is handled automatically |
 | `--no-border` | Don't draw the hairline border around each slide |
 
 With `--workers 1` a per-page log is printed, for example:

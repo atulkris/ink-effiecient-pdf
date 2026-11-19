@@ -1071,11 +1071,16 @@ def default_workers() -> int:
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Convert PPT/PPTX/PDF presentations into ink-efficient 2-up A4 PDFs.")
-    parser.add_argument("input_folder")
-    parser.add_argument("output_folder", nargs="?")
-    parser.add_argument("--workers", type=int, default=default_workers())
+    parser.add_argument("input_folder",
+                        help="folder containing .pptx/.ppt/.pdf files")
+    parser.add_argument("output_folder", nargs="?",
+                        help="where to save results (default: <input_folder>/output)")
+    parser.add_argument("--workers", type=int, default=default_workers(),
+                        help="files processed in parallel (default: %(default)s); "
+                             "1 also prints a per-page log")
     parser.add_argument("--raster-only", action="store_true",
-                        help="rasterise converted pages fully instead of keeping vector text")
+                        help="force full image processing on every page "
+                             "(not needed normally; pages are handled automatically)")
     parser.add_argument("--no-border", action="store_true",
                         help="do not draw a hairline border around each slide")
     args = parser.parse_args()
